@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e10b5538-5cf6-42d0-8440-cbfc3b9a420d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/_posts/2024-01-12-Canal介绍和应用.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.010.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,14 +45,18 @@
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/longcheng/GolandProjects/chenglong799466.github.io",
+    "last_opened_file_path": "/Users/longcheng/GolandProjects/chenglong799466.github.io/img",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Markdown",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/img" />
+      <recent name="$PROJECT_DIR$/_posts" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
