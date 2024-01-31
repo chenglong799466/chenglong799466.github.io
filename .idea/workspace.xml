@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e10b5538-5cf6-42d0-8440-cbfc3b9a420d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/_posts/2024-01-19-基于Gorm自动代码生成实践.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_posts/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/基于Gorm自动代码生成实践01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/基于Gorm自动代码生成实践02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/基于Gorm自动代码生成实践03.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0e7a7c7a-e419-4d16-a74f-1a6dacaf0a92.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0e7a7c7a-e419-4d16-a74f-1a6dacaf0a92.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/基于Gorm自动代码生成实践5.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-01-19-基于Gorm自动代码生成实践.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-01-19-基于Gorm自动代码生成实践.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/img.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
