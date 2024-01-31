@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e10b5538-5cf6-42d0-8440-cbfc3b9a420d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/_posts/2024-01-31-go原生包flag.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/go原生包flag001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/go原生包flag002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/go原生包flag003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-01-31-go原生包flag.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-01-31-go原生包flag.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
