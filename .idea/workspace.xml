@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10b5538-5cf6-42d0-8440-cbfc3b9a420d" name="Changes" comment="" />
+    <list default="true" id="e10b5538-5cf6-42d0-8440-cbfc3b9a420d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/_config_bak.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Canal的介绍和应用04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Canal的介绍和应用05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Canal的介绍和应用06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Canal的介绍和应用08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/Canal的介绍和应用09.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-01-11-Git的使用场景.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-01-11-Git的使用场景.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2024-01-12-Canal介绍和应用.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2024-01-12-Canal介绍和应用.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.002.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.005.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.006.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.007.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.008.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.009.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/Canal的介绍和应用07.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Aspose.Words.8b751d17-1d38-4dd4-a39d-e3295100c70a.010.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/introduction-and-application-of-canal01.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/Canal的介绍和应用01.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/introduction-and-application-of-canal02.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/Canal的介绍和应用02.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/introduction-and-application-of-canal03.png" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +59,7 @@
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/longcheng/GolandProjects/chenglong799466.github.io/img",
+    "last_opened_file_path": "/Users/longcheng/GolandProjects/chenglong799466.github.io/_posts",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -52,8 +74,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/img" />
       <recent name="$PROJECT_DIR$/_posts" />
+      <recent name="$PROJECT_DIR$/img" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
