@@ -1,13 +1,17 @@
 # Site settings
 title: Blog
 SEOTitle: chenglong的博客 | CL Blog
-header-img: img/post-bg-coffee.jpeg
+header-img: img/abstract-bg-02.jpg
 email: chenglong799466@gmail.com
 description: "Every failure is leading towards success."
 keyword: "CL Blog, chenglong的博客, chenglong, Go , Java"
 url: "https://chenglong799466.github.io"
 baseurl: ""
 github_repo: "https://github.com/chenglong799466/chenglong799466.github.io"
+
+# Available background images for posts and pages
+# Options: img/post-bg-coffee.jpeg (default), img/abstract-bg-01.jpg, img/abstract-bg-02.jpg, 
+# img/abstract-bg-03.jpg, img/nature-bg-04.jpg, img/nature-bg-05.jpg, img/nature-bg-06.jpg
 
 # Sidebar settings
 sidebar: true

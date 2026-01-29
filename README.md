@@ -43,7 +43,7 @@ title:      文章标题
 subtitle:   副标题
 date:       2024-01-11
 author:     chenglong
-header-img: img/post-bg.jpg
+header-img: img/post-bg-coffee.jpeg
 catalog:    true
 tags:
     - 标签1
