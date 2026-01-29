@@ -1,0 +1,166 @@
+---
+layout: default
+title: 标签
+permalink: /tags.html
+---
+
+<style>
+    .tags-container {
+        background: #fff;
+        border-radius: 8px;
+        padding: 3rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .tags-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .tags-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+    
+    .tags-description {
+        font-size: 1.1rem;
+        color: #666;
+    }
+    
+    .tags-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 3rem;
+        padding-bottom: 3rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .tag-cloud-item {
+        display: inline-block;
+        background: #0066cc;
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 1rem;
+    }
+    
+    .tag-cloud-item:hover {
+        background: #0052a3;
+        transform: scale(1.05);
+    }
+    
+    .tag-cloud-item .count {
+        background: rgba(255,255,255,0.3);
+        padding: 0.2rem 0.5rem;
+        border-radius: 12px;
+        margin-left: 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .tag-section {
+        margin-bottom: 3rem;
+    }
+    
+    .tag-section-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid #0066cc;
+        display: inline-block;
+    }
+    
+    .tag-posts-list {
+        display: grid;
+        gap: 1rem;
+    }
+    
+    .tag-post-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background: #f9f9f9;
+        border-radius: 5px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s;
+    }
+    
+    .tag-post-item:hover {
+        background: #f0f0f0;
+        transform: translateX(5px);
+    }
+    
+    .tag-post-title {
+        font-size: 1.1rem;
+        color: #333;
+        flex: 1;
+    }
+    
+    .tag-post-date {
+        color: #999;
+        font-size: 0.9rem;
+        margin-left: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .tags-container {
+            padding: 1.5rem;
+        }
+        
+        .tags-title {
+            font-size: 1.8rem;
+        }
+        
+        .tag-post-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .tag-post-date {
+            margin-left: 0;
+        }
+    }
+</style>
+
+<div class="tags-container">
+    <header class="tags-header">
+        <h1 class="tags-title">🏷️ 标签</h1>
+        <p class="tags-description">共 {{ site.tags | size }} 个标签，{{ site.posts | size }} 篇文章</p>
+    </header>
+    
+    <!-- 标签云 -->
+    <div class="tags-cloud">
+        {% assign sorted_tags = site.tags | sort %}
+        {% for tag in sorted_tags %}
+        <a href="#{{ tag[0] }}" class="tag-cloud-item">
+            {{ tag[0] }}
+            <span class="count">{{ tag[1] | size }}</span>
+        </a>
+        {% endfor %}
+    </div>
+    
+    <!-- 标签详情 -->
+    {% for tag in sorted_tags %}
+    <div class="tag-section" id="{{ tag[0] }}">
+        <h2 class="tag-section-title">{{ tag[0] }}</h2>
+        <div class="tag-posts-list">
+            {% for post in tag[1] %}
+            <a href="{{ post.url | prepend: site.baseurl }}" class="tag-post-item">
+                <span class="tag-post-title">{{ post.title }}</span>
+                <span class="tag-post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -1,74 +1,185 @@
-<!-- ============================================
-     首页 (Home Page / Index)
-     ============================================
-     功能说明：
-     1. 博客首页，展示最新的博客文章列表
-     2. 使用Jekyll分页功能，每页显示固定数量的文章
-     3. 显示文章标题、副标题、摘要和发布信息
-     4. 提供上一页/下一页导航
-     
-     布局：使用page布局模板
-     分页：通过paginator对象实现分页
-     ============================================ -->
 ---
-layout: page
-description: "Thinking will not overcome fear but action will."
+layout: default
 ---
 
-<!-- ========================================
-     文章列表循环
-     ========================================
-     遍历当前页的所有文章（paginator.posts）
-     每篇文章显示：标题、副标题、内容摘要、发布信息
-     ======================================== -->
-{% for post in paginator.posts %}
-<!-- 单篇文章预览卡片 -->
-<div class="post-preview">
-    <!-- 文章链接：点击跳转到文章详情页 -->
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <!-- 文章标题 -->
-        <h2 class="post-title">
-            {{ post.title }}
-        </h2>
-        <!-- 文章副标题（如果存在） -->
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-        <!-- 文章内容摘要：去除HTML标签，截取前200个字符 -->
-        <div class="post-content-preview">
-            {{ post.content | strip_html | truncate:200 }}
-        </div>
-    </a>
-    <!-- 文章元信息：作者和发布日期 -->
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
+<style>
+    .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        padding: 4rem 2rem;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero p {
+        font-size: 1.3rem;
+        opacity: 0.9;
+    }
+    
+    .posts-list {
+        display: grid;
+        gap: 2rem;
+    }
+    
+    .post-card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+    
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    
+    .post-card-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+    
+    .post-card-subtitle {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    
+    .post-card-meta {
+        display: flex;
+        gap: 1.5rem;
+        color: #999;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .post-card-excerpt {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    .post-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .post-card-tag {
+        background: #f0f0f0;
+        color: #666;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.85rem;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+    
+    .pagination a,
+    .pagination span {
+        padding: 0.5rem 1rem;
+        background: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #333;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .pagination a:hover {
+        background: #0066cc;
+        color: #fff;
+    }
+    
+    .pagination .current {
+        background: #0066cc;
+        color: #fff;
+    }
+    
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+        }
+        
+        .post-card {
+            padding: 1.5rem;
+        }
+        
+        .post-card-title {
+            font-size: 1.4rem;
+        }
+        
+        .post-card-meta {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>{{ site.title }}</h1>
+    <p>{{ site.description }}</p>
 </div>
-<!-- 分隔线 -->
-<hr>
-{% endfor %}
 
-<!-- ========================================
-     分页导航器
-     ========================================
-     功能：当文章总页数大于1时显示分页导航
-     包含：上一页（较新文章）和下一页（较旧文章）按钮
-     ======================================== -->
+<!-- Posts List -->
+<div class="posts-list">
+    {% for post in paginator.posts %}
+    <a href="{{ post.url | prepend: site.baseurl }}" class="post-card">
+        <h2 class="post-card-title">{{ post.title }}</h2>
+        {% if post.subtitle %}
+        <p class="post-card-subtitle">{{ post.subtitle }}</p>
+        {% endif %}
+        <div class="post-card-meta">
+            <span>📅 {{ post.date | date: "%Y年%m月%d日" }}</span>
+            {% if post.author %}
+            <span>✍️ {{ post.author }}</span>
+            {% endif %}
+        </div>
+        {% if post.excerpt %}
+        <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+        {% endif %}
+        {% if post.tags %}
+        <div class="post-card-tags">
+            {% for tag in post.tags %}
+            <span class="post-card-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </a>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
 {% if paginator.total_pages > 1 %}
-<ul class="pager">
-    <!-- 上一页按钮：显示较新的文章 -->
+<div class="pagination">
     {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-    </li>
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">← 上一页</a>
     {% endif %}
-    <!-- 下一页按钮：显示较旧的文章 -->
+    
+    <span class="current">第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
+    
     {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-    </li>
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">下一页 →</a>
     {% endif %}
-</ul>
+</div>
 {% endif %}

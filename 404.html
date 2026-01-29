@@ -1,51 +1,88 @@
-<!-- ============================================
-     404错误页面 (404 Error Page)
-     ============================================
-     功能说明：
-     1. 当用户访问不存在的页面时显示此页面
-     2. 提供友好的错误提示信息
-     3. 使用全屏布局，提供更好的视觉体验
-     
-     布局：使用default布局模板
-     样式：通过JavaScript添加page-fullscreen类实现全屏效果
-     固定链接：/404.html（GitHub Pages会自动使用此页面）
-     ============================================ -->
 ---
 layout: default
-description: "你来到了没有知识的荒原 🙊"
-header-img: "img/post-bg-coffee.jpeg"
+title: 404 - 页面未找到
 permalink: /404.html
 ---
 
+<style>
+    .error-container {
+        text-align: center;
+        padding: 4rem 2rem;
+    }
+    
+    .error-code {
+        font-size: 8rem;
+        font-weight: bold;
+        color: #0066cc;
+        margin-bottom: 1rem;
+        line-height: 1;
+    }
+    
+    .error-title {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+    
+    .error-description {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 2rem;
+    }
+    
+    .error-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .error-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: #0066cc;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        transition: background 0.3s;
+    }
+    
+    .error-button:hover {
+        background: #0052a3;
+    }
+    
+    .error-button.secondary {
+        background: #f0f0f0;
+        color: #333;
+    }
+    
+    .error-button.secondary:hover {
+        background: #e0e0e0;
+    }
+    
+    @media (max-width: 768px) {
+        .error-code {
+            font-size: 5rem;
+        }
+        
+        .error-title {
+            font-size: 1.5rem;
+        }
+        
+        .error-description {
+            font-size: 1rem;
+        }
+    }
+</style>
 
-<!-- ========================================
-     页面头部区域
-     ========================================
-     显示404错误信息和友好的提示文字
-     使用背景图片营造氛围
-     ======================================== -->
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<div class="site-heading" id="tag-heading">
-					<!-- 404错误代码 -->
-					<h1>404</h1>
-					<!-- 友好的错误提示信息 -->
-					<span class="subheading">{{ page.description }}</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>
-
-<!-- ========================================
-     全屏效果脚本
-     ========================================
-     为body元素添加page-fullscreen类
-     使404页面以全屏方式显示，提供更好的视觉体验
-     ======================================== -->
-<script>
-	document.body.classList.add('page-fullscreen');
-</script>
+<div class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-title">页面未找到</h1>
+    <p class="error-description">抱歉，您访问的页面不存在或已被删除。</p>
+    
+    <div class="error-actions">
+        <a href="{{ site.baseurl }}/" class="error-button">返回首页</a>
+        <a href="{{ site.baseurl }}/tags.html" class="error-button secondary">浏览标签</a>
+    </div>
+</div>

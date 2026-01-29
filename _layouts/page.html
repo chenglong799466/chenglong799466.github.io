@@ -1,361 +1,60 @@
-<!-- ============================================
-     页面布局模板 (Page Layout)
-     ============================================
-     功能说明：
-     1. 用于静态页面的布局模板（如首页、标签页、关于页）
-     2. 继承自default.html布局
-     3. 包含页面头部、主内容区、侧边栏等组件
-     4. 支持侧边栏开关（通过_config.yml中的sidebar配置）
-     
-     布局结构：
-     - 页面头部（带背景图）
-     - 主内容区（文章列表或页面内容）
-     - 侧边栏（标签目录、热门标签、个人简介、友情链接）
-     
-     使用场景：
-     - index.html（首页）
-     - tags.html（标签页）
-     - about.html（关于页）
-     ============================================ -->
 ---
 layout: default
 ---
 
-<!-- ========================================
-     页面头部区域
-     ========================================
-     功能：
-     - 显示页面标题和描述
-     - 使用背景图片（header-img）
-     - 响应式设计，适配各种屏幕
-     ======================================== -->
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <!-- 页面标题：优先使用页面自定义标题，否则使用网站标题 -->
-                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-                    <!-- 页面描述/副标题 -->
-                    <span class="subheading">{{ page.description }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<style>
+    .page-container {
+        background: #fff;
+        border-radius: 8px;
+        padding: 3rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .page-header {
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+    
+    .page-description {
+        font-size: 1.2rem;
+        color: #666;
+    }
+    
+    .page-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #333;
+    }
+    
+    @media (max-width: 768px) {
+        .page-container {
+            padding: 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+        }
+    }
+</style>
 
-<!-- ========================================
-     主内容区域
-     ========================================
-     根据_config.yml中的sidebar配置决定布局：
-     - sidebar: false - 无侧边栏布局（内容居中）
-     - sidebar: true - 有侧边栏布局（左侧内容，右侧边栏）
-     ======================================== -->
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        {% if site.sidebar == false %}
-<!-- ============================================
-     无侧边栏布局 (NO SIDEBAR)
-     ============================================
-     适用场景：简单页面，不需要侧边栏
-     布局：内容居中显示，下方显示标签和友情链接
-     ============================================ -->
-<!-- NO SIDEBAR -->
-    <!-- ========================================
-         文章列表容器
-         ========================================
-         显示页面的主要内容（如文章列表）
-         ======================================== -->
-    <!-- PostList Container -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
-                <!-- 页面内容：由具体页面（如index.html）提供 -->
-                {{ content }}
-            </div>
-    <!-- ========================================
-         底部区域（无侧边栏模式）
-         ========================================
-         显示热门标签和友情链接
-         ======================================== -->
-    <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- ========================================
-                     热门标签区域
-                     ========================================
-                     显示文章数量超过阈值的标签
-                     阈值由_config.yml中的featured-condition-size设置
-                     ======================================== -->
-                <!-- Featured Tags -->
-                {% if site.featured-tags %}
-                <section>
-                    <h5><a href="{{'/tags/' | prepend: site.baseurl }}">FEATURED TAGS</a></h5>
-                    <div class="tags">
-        				<!-- 遍历所有标签 -->
-        				{% for tag in site.tags %}
-                            <!-- 只显示文章数量大于阈值的标签 -->
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                				<a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                                    {{ tag[0] }}
-                                </a>
-                            {% endif %}
-        				{% endfor %}
-        			</div>
-                </section>
-                {% endif %}
-
-                <!-- ========================================
-                     友情链接区域
-                     ========================================
-                     显示在_config.yml中配置的友情链接
-                     ======================================== -->
-                <!-- Friends Blog -->
-                {% if site.friends %}
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-                    <!-- 遍历友情链接列表 -->
-                    {% for friend in site.friends %}
-                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
-        {% else %}
-
-<!-- ============================================
-     有侧边栏布局 (USE SIDEBAR)
-     ============================================
-     适用场景：首页等需要丰富侧边栏的页面
-     布局：左侧主内容区（8列），右侧边栏（3列）
-     侧边栏内容：
-     - 标签目录（所有标签列表）
-     - 热门标签（文章数量多的标签）
-     - 个人简介（头像、描述、社交链接）
-     - 友情链接
-     ============================================ -->
-<!-- USE SIDEBAR -->
-    <!-- ========================================
-         文章列表容器（有侧边栏模式）
-         ========================================
-         左侧主内容区，占8列
-         ======================================== -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-                <!-- 页面内容：由具体页面提供 -->
-    			{{ content }}
-    		</div>
-    <!-- ========================================
-         侧边栏容器
-         ========================================
-         右侧边栏，占3列
-         包含：标签目录、热门标签、个人简介、友情链接
-         ======================================== -->
-    <!-- Sidebar Container -->
-            <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-                <!-- ========================================
-                     标签目录区域
-                     ========================================
-                     功能：显示所有标签的完整列表
-                     排序：按标签名称字母顺序排序
-                     显示：标签名称 + 文章数量
-                     ======================================== -->
-                <!-- Tags Catalog -->
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="{{'/tags/' | prepend: site.baseurl }}">📚 标签目录</a></h5>
-                    <div class="tags-catalog">
-                        <!-- 对标签进行排序 -->
-                        {% assign sorted_tags = site.tags | sort %}
-                        <!-- 遍历所有标签 -->
-                        {% for tag in sorted_tags %}
-                            <div class="tag-item">
-                                <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}">
-                                    <i class="fa fa-tag"></i> {{ tag[0] }}
-                                    <!-- 显示该标签下的文章数量 -->
-                                    <span class="tag-count">({{ tag[1].size }})</span>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </section>
-                
-                <!-- ========================================
-                     热门标签区域
-                     ========================================
-                     功能：显示文章数量超过阈值的热门标签
-                     样式：标签云形式，大小根据文章数量决定
-                     ======================================== -->
-                <!-- Featured Tags -->
-                {% if site.featured-tags %}
-                <section>
-                    <hr>
-                    <h5><a href="{{'/tags/' | prepend: site.baseurl }}">🔥 热门标签</a></h5>
-                    <div class="tags">
-                        <!-- 遍历所有标签 -->
-                        {% for tag in site.tags %}
-                            <!-- 只显示文章数量大于阈值的标签 -->
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                                <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                                    {{ tag[0] }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </section>
-                {% endif %}
-
-                <!-- ========================================
-                     个人简介区域
-                     ========================================
-                     功能：显示博主的个人信息
-                     内容：
-                     - 头像（sidebar-avatar）
-                     - 个人描述（sidebar-about-description）
-                     - 社交媒体链接（RSS、简书、Twitter等）
-                     - 邮箱地址
-                     显示条件：仅在中大屏幕显示（visible-md visible-lg）
-                     ======================================== -->
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="{{'/about/' | prepend: site.baseurl }}">ABOUT ME</a></h5>
-                    <div class="short-about">
-                        <!-- 头像 -->
-                        {% if site.sidebar-avatar %}
-                            <a href="{{ site.baseurl }}/about">
-                                <img src="{{site.sidebar-avatar}}"/>
-                            </a>
-                        {% endif %}
-                        <!-- 个人描述 -->
-                        {% if site.sidebar-about-description %}
-                            <p>{{site.sidebar-about-description}}</p>
-                        {% endif %}
-                        <!-- ========================================
-                             社交媒体链接
-                             ========================================
-                             根据_config.yml中的配置显示对应的社交媒体图标
-                             支持：RSS、简书、Twitter、知乎、微博、Facebook、GitHub
-                             ======================================== -->
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            <!-- RSS订阅 -->
-                            {% if site.RSS %}
-                            <li>
-                                <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                            <!-- 简书 -->
-                            {% if site.jianshu_username %}
-                            <li>
-                                <a target="_blank" href="https://www.jianshu.com/u/{{ site.jianshu_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                            <!-- Twitter -->
-                            {% if site.twitter_username %}
-                            <li>
-                                <a href="https://twitter.com/{{ site.twitter_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                            <!-- 知乎 -->
-                            {% if site.zhihu_username %}
-                            <li>
-                                <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                            <!-- 微博 -->
-                            {% if site.weibo_username %}
-                            <li>
-                                <a target="_blank" href="http://weibo.com/{{ site.weibo_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                            <!-- Facebook -->
-                            {% if site.facebook_username %}
-                            <li>
-                                <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                            <!-- GitHub -->
-                            {% if site.github_username %}
-                            <li>
-                                <a target="_blank" href="https://github.com/{{ site.github_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                            
-                        </ul>
-                        <!-- 邮箱地址 -->
-                        {% if site.email %}
-                            <p>✉️ {{site.email}}</p>
-                        {% endif %}
-                    </div>
-                </section>
-                <!-- ========================================
-                     友情链接区域
-                     ========================================
-                     显示在_config.yml中配置的友情链接
-                     ======================================== -->
-                <!-- Friends Blog -->
-                {% if site.friends %}
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-                    <!-- 遍历友情链接列表 -->
-                    {% for friend in site.friends %}
-                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-    		</div>
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">{{ page.title }}</h1>
+        {% if page.description %}
+        <p class="page-description">{{ page.description }}</p>
         {% endif %}
-	</div>
+    </header>
+    
+    <div class="page-content">
+        {{ content }}
+    </div>
 </div>

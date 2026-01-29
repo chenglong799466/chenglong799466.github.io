@@ -1,88 +1,149 @@
-<!-- ============================================
-     默认布局模板 (Default Layout)
-     ============================================
-     功能说明：
-     1. 最基础的页面布局模板，所有其他布局都继承自此模板
-     2. 定义了完整的HTML文档结构
-     3. 包含头部、导航、内容区、页脚等基础组件
-     4. 其他布局（page、post、keynote）通过layout: default继承此布局
-     
-     继承关系：
-     default.html (基础)
-         ├── page.html (页面布局)
-         └── post.html (文章布局)
-             └── keynote.html (演示布局)
-     
-     使用场景：
-     - 404错误页
-     - 标签页
-     - 其他需要基础布局的页面
-     ============================================ -->
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- ========================================
-     HTML头部区域
-     ========================================
-     引入head.html组件，包含：
-     - Meta标签（字符编码、视口设置、SEO信息）
-     - 页面标题
-     - CSS样式文件
-     - 网站图标
-     - PWA配置
-     ======================================== -->
-{% include head.html %}
-
-<!-- ========================================
-     页面主体
-     ========================================
-     ontouchstart属性：优化移动端触摸事件性能
-     ======================================== -->
-<body ontouchstart="">
-    <!-- ========================================
-         导航栏组件
-         ========================================
-         引入nav.html，包含：
-         - 网站Logo/标题
-         - 导航菜单（首页、标签、关于等）
-         - 移动端汉堡菜单
-         ======================================== -->
-    {% include nav.html %}
-
-    <!-- ========================================
-         页面内容区域
-         ========================================
-         {{ content }}是Liquid模板变量
-         作用：插入子布局或页面的具体内容
-         
-         内容来源：
-         - 如果是page.html布局，content是页面的主要内容
-         - 如果是post.html布局，content是文章内容
-         - 如果是直接使用default布局，content是页面自身内容
-         ======================================== -->
-    {{ content }}
-
-    <!-- ========================================
-         页脚组件
-         ========================================
-         引入footer.html，包含：
-         - 社交媒体链接
-         - 版权信息
-         - JavaScript库加载
-         - Service Worker注册
-         - 统计代码
-         ======================================== -->
-    {% include footer.html %}
-
-    <!-- ========================================
-         微信分享优化
-         ========================================
-         功能：解决微信分享时的图片显示问题
-         原理：在页面中隐藏一个1x1像素的图片
-         作用：微信爬虫会抓取这个图片作为分享缩略图
-         ======================================== -->
-    <!-- Image to hack wechat -->
-    <img src="{{ site.baseurl }}/img/apple-touch-icon.png" width="0" height="0" />
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="keywords" content="{% if page.tags %}{{ page.tags | join: ', ' }}{% else %}{{ site.keyword }}{% endif %}">
+    <meta name="author" content="{{ site.title }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ site.baseurl }}/img/favicon.ico">
+    <link rel="apple-touch-icon" href="{{ site.baseurl }}/img/apple-touch-icon.png">
+    
+    <!-- CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #0066cc;
+        }
+        
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="{{ site.baseurl }}/" class="logo">{{ site.title }}</a>
+                <ul class="nav-links">
+                    <li><a href="{{ site.baseurl }}/">首页</a></li>
+                    <li><a href="{{ site.baseurl }}/tags.html">标签</a></li>
+                    <li><a href="{{ site.baseurl }}/about.html">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            {{ content }}
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+            <p>
+                <a href="{{ site.github_repo }}" target="_blank">GitHub</a> | 
+                <a href="{{ site.baseurl }}/tags.html">标签</a> | 
+                <a href="{{ site.baseurl }}/about.html">关于</a>
+            </p>
+        </div>
+    </footer>
 </body>
-
 </html>
