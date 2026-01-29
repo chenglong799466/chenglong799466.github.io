@@ -1,3 +1,15 @@
+<!-- ============================================
+     标签页面 (Tags Page)
+     ============================================
+     功能说明：
+     1. 展示所有博客文章的标签
+     2. 标签云：以云状形式展示所有标签，大小根据文章数量决定
+     3. 标签列表：按标签分组显示所有文章
+     4. 点击标签云中的标签可快速定位到对应的文章列表
+     
+     布局：使用default布局模板
+     交互：标签云由footer.html中的jquery.tagcloud.js实现
+     ============================================ -->
 ---
 title: Tags
 layout: default
@@ -5,6 +17,11 @@ description: keep hungry keep foolish
 header-img: "img/post-bg-coffee.jpeg"
 ---
 
+<!-- ========================================
+     页面头部区域
+     ========================================
+     显示页面标题和描述，背景图片作为背景
+     ======================================== -->
 <!-- Page Header -->
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
     <div class="container">
@@ -19,10 +36,22 @@ header-img: "img/post-bg-coffee.jpeg"
     </div>
 </header>
 
+<!-- ========================================
+     主内容区域
+     ======================================== -->
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- ========================================
+                 标签云区域
+                 ========================================
+                 功能：
+                 - 以云状形式展示所有标签
+                 - 标签大小根据rel属性（文章数量）决定
+                 - 点击标签可快速定位到下方对应的文章列表
+                 - 颜色渐变效果由jquery.tagcloud.js实现
+                 ======================================== -->
             <!-- 标签云 -->
 			<div id='tag_cloud' class="tags">
 				{% for tag in site.tags %}
@@ -30,24 +59,40 @@ header-img: "img/post-bg-coffee.jpeg"
 				{% endfor %}
 			</div>
 
+            <!-- ========================================
+                 标签列表区域
+                 ========================================
+                 功能：
+                 - 按标签分组显示所有文章
+                 - 每个标签下显示该标签的所有文章
+                 - 文章显示标题和副标题
+                 - 每个标签组有独立的ID，供标签云锚点定位
+                 ======================================== -->
             <!-- 标签列表 -->
 			{% for tag in site.tags %}
+			<!-- 单个标签组 -->
 			<div class="one-tag-list">
+			  	<!-- 标签名称头部，id用于锚点定位 -->
 			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
                     <span class="tag-text">{{ tag[0] }}</span>
                 </span>
+				<!-- 遍历该标签下的所有文章 -->
 				{% for post in tag[1] %}
+				 <!-- 文章预览卡片 -->
 				 <div class="post-preview">
 				    <a href="{{ post.url | prepend: site.baseurl }}">
+				        <!-- 文章标题 -->
 				        <h2 class="post-title">
                             {{ post.title }}
 				        </h2>
+				        <!-- 文章副标题（如果存在） -->
 				        {% if post.subtitle %}
 				        <h3 class="post-subtitle">
 				            {{ post.subtitle }}
 				        </h3>
 				        {% endif %}
 				    </a>
+				    <!-- 可选：显示文章发布日期（当前已注释） -->
 				    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
 				</div>
 				<hr>

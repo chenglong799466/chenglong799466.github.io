@@ -1,40 +1,82 @@
+<!-- ============================================
+     HTML头部组件 (HTML Head Component)
+     ============================================
+     功能说明：
+     1. 定义页面元数据（meta标签）
+     2. 引入CSS样式文件
+     3. 配置PWA和SEO相关设置
+     4. 设置网站图标和主题色
+     ============================================ -->
 <head>
+    <!-- ========================================
+         基础Meta标签
+         ======================================== -->
+    <!-- 字符编码：UTF-8 -->
     <meta charset="utf-8">
+    <!-- IE兼容模式：使用最新渲染引擎 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Google站点验证码 -->
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <!-- 响应式设计：视口设置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 网站描述：用于SEO -->
     <meta name="description" content="{{ site.description }}">
+    <!-- 网站关键词：用于SEO -->
     <meta name="keywords"  content="{{ site.keyword }}">
+    <!-- Chrome浏览器标签页主题色 -->
     <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
     
+    <!-- ========================================
+         页面标题
+         ========================================
+         格式：页面标题 - 网站SEO标题
+         如果是首页，只显示网站SEO标题
+         ======================================== -->
     <title>{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}</title>
 
-    <!-- Web App Manifest -->
+    <!-- ========================================
+         PWA配置 (Progressive Web App)
+         ======================================== -->
+    <!-- Web应用清单文件：定义PWA的名称、图标、启动方式等 -->
     <link rel="manifest" href="{{ site.baseurl }}/pwa/manifest.json">
 
-    <!-- Favicon -->
+    <!-- ========================================
+         网站图标 (Favicon)
+         ======================================== -->
+    <!-- 浏览器标签页图标 -->
     <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
-
-    <!-- Safari Webpage Icon    by-BY -->
+    <!-- Safari iOS设备主屏幕图标 -->
     <link rel="apple-touch-icon" href="{{ site.baseurl }}/img/apple-touch-icon.png">
     
-    <!-- Canonical URL -->
+    <!-- ========================================
+         SEO优化
+         ======================================== -->
+    <!-- 规范链接：告诉搜索引擎页面的标准URL -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
-    <!-- Bootstrap Core CSS -->
+    <!-- ========================================
+         CSS样式文件引入
+         ======================================== -->
+    <!-- Bootstrap核心CSS：响应式布局框架 -->
     <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
 
-    <!-- Custom CSS -->
+    <!-- 自定义CSS：博客主题样式（压缩版） -->
     <link rel="stylesheet" href="{{ "/css/hux-blog.min.css" | prepend: site.baseurl }}">
 
-    <!-- Pygments Github CSS -->
+    <!-- 代码高亮CSS：Pygments的GitHub风格 -->
     <link rel="stylesheet" href="{{ "/css/syntax.css" | prepend: site.baseurl }}">
 
-    <!-- Custom Fonts -->
+    <!-- ========================================
+         字体图标库
+         ======================================== -->
+    <!-- Font Awesome：提供各种图标字体 -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- ========================================
+         IE8兼容性支持
+         ========================================
+         注意：通过file://协议访问时不生效
+         ======================================== -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>

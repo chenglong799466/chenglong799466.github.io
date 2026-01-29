@@ -1,14 +1,44 @@
+<!-- ============================================
+     文章布局模板 (Post Layout)
+     ============================================
+     功能说明：
+     1. 用于博客文章的布局模板
+     2. 继承自default.html布局
+     3. 包含文章头部、正文内容、文章目录、评论系统等
+     4. 支持上一篇/下一篇文章导航
+     5. 集成Gitalk和Disqus评论系统
+     
+     布局结构：
+     - 文章头部（标题、副标题、标签、发布信息、背景图）
+     - 文章正文内容
+     - 上一篇/下一篇导航
+     - 评论系统（Gitalk/Disqus）
+     - 侧边栏目录（可选）
+     - 热门标签和友情链接
+     
+     使用场景：
+     - _posts/目录下的所有博客文章
+     ============================================ -->
 ---
 layout: default
 ---
 
+<!-- ========================================
+     文章头部样式
+     ========================================
+     功能：
+     - 设置文章头部背景图片
+     - 支持遮罩层（header-mask）调整图片亮度
+     ======================================== -->
 <!-- Post Header -->
 <style type="text/css">
+    /* 文章头部背景图片设置 */
     header.intro-header{
         position: relative;
         background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
     }
 
+    /* 遮罩层：用于调整背景图片亮度，使文字更清晰 */
     {% if page.header-mask %}
     header.intro-header .header-mask{
         width: 100%;
@@ -18,19 +48,33 @@ layout: default
     }
     {% endif %}
 </style>
+<!-- ========================================
+     文章头部区域
+     ========================================
+     显示：文章标签、标题、副标题、作者、发布日期
+     ======================================== -->
 <header class="intro-header" >
+    <!-- 遮罩层容器 -->
     <div class="header-mask"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
+                    <!-- ========================================
+                         文章标签列表
+                         ========================================
+                         显示文章的所有标签，点击可跳转到标签页
+                         ======================================== -->
                     <div class="tags">
                         {% for tag in page.tags %}
                         <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
                         {% endfor %}
                     </div>
+                    <!-- 文章标题 -->
                     <h1>{{ page.title }}</h1>
+                    <!-- 文章副标题 -->
                     <h2 class="subheading">{{ page.subtitle }}</h2>
+                    <!-- 文章元信息：作者和发布日期 -->
                     <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
                 </div>
             </div>
@@ -38,22 +82,39 @@ layout: default
     </div>
 </header>
 
+<!-- ========================================
+     文章内容区域
+     ======================================== -->
 <!-- Post Content -->
 <article>
     <div class="container">
         <div class="row">
 
+    <!-- ========================================
+         文章正文容器
+         ========================================
+         显示文章的Markdown内容（转换为HTML）
+         ======================================== -->
     <!-- Post Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container">
 
+				<!-- 文章正文内容：由Markdown文件转换而来 -->
 				{{ content }}
 
+                <!-- 隐藏的分隔线 -->
                 <hr style="visibility: hidden;">
 
+                <!-- ========================================
+                     文章导航区域
+                     ========================================
+                     功能：上一篇/下一篇文章导航
+                     显示：文章标题，支持tooltip提示
+                     ======================================== -->
                 <ul class="pager">
+                    <!-- 上一篇文章链接 -->
                     {% if page.previous.url %}
                     <li class="previous">
                         <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
@@ -62,6 +123,7 @@ layout: default
                         </a>
                     </li>
                     {% endif %}
+                    <!-- 下一篇文章链接 -->
                     {% if page.next.url %}
                     <li class="next">
                         <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
@@ -73,30 +135,50 @@ layout: default
                 </ul>
 
 
+                <!-- ============================================
+                     Gitalk评论系统
+                     ============================================
+                     功能：基于GitHub Issues的评论系统
+                     配置：在_config.yml中设置gitalk.enable=true
+                     特点：
+                     - 无需后端服务器
+                     - 使用GitHub账号登录
+                     - 评论数据存储在GitHub Issues中
+                     - 使用MD5处理页面路径作为Issue ID
+                     ============================================ -->
                 <!--Gitalk评论start  -->
                 {% if site.gitalk.enable %}
                 <!-- 引入Gitalk评论插件  -->
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
                 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <!-- Gitalk评论容器 -->
                 <div id="gitalk-container"></div>
                 <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
                 <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
                 <script src="{{ site.baseurl }}/js/md5.min.js"></script>
                 <script type="text/javascript">
+                    // Gitalk初始化配置
                     var gitalk = new Gitalk({
-                    clientID: '{{site.gitalk.clientID}}',
-                    clientSecret: '{{site.gitalk.clientSecret}}',
-                    repo: '{{site.gitalk.repo}}',
-                    owner: '{{site.gitalk.owner}}',
-                    admin: ['{{site.gitalk.admin}}'],
-                    distractionFreeMode: {{site.gitalk.distractionFreeMode}},
-                    id: md5(location.pathname),
+                    clientID: '{{site.gitalk.clientID}}',              // GitHub Application Client ID
+                    clientSecret: '{{site.gitalk.clientSecret}}',      // GitHub Application Client Secret
+                    repo: '{{site.gitalk.repo}}',                      // 存储评论的GitHub仓库
+                    owner: '{{site.gitalk.owner}}',                    // GitHub仓库所有者
+                    admin: ['{{site.gitalk.admin}}'],                  // GitHub仓库管理员
+                    distractionFreeMode: {{site.gitalk.distractionFreeMode}},  // 无干扰模式
+                    id: md5(location.pathname),                        // 页面唯一标识（使用MD5处理路径）
                     });
-                    gitalk.render('gitalk-container');
+                    gitalk.render('gitalk-container');                 // 渲染评论组件
                 </script>
                 {% endif %}
                 <!-- Gitalk end -->
 
+                <!-- ============================================
+                     Disqus评论系统
+                     ============================================
+                     功能：传统的第三方评论系统
+                     配置：在_config.yml中设置disqus_username
+                     注意：国内访问可能需要翻墙
+                     ============================================ -->
                 {% if site.disqus_username %}
                 <!-- disqus 评论框 start -->
                 <div class="comment">
@@ -107,6 +189,17 @@ layout: default
 
             </div>  
 
+    <!-- ========================================
+         侧边栏目录容器
+         ========================================
+         功能：自动生成文章目录（TOC）
+         显示条件：
+         - 在文章Front Matter中设置catalog: true
+         - 仅在大屏幕显示（visible-lg-block）
+         交互：
+         - 点击目录项平滑滚动到对应位置
+         - 支持折叠/展开切换
+         ======================================== -->
     <!-- Side Catalog Container -->
         {% if page.catalog %}
             <div class="
@@ -117,26 +210,40 @@ layout: default
                 <div class="side-catalog">
                     <hr class="hidden-sm hidden-xs">
                     <h5>
+                        <!-- 目录标题，点击可折叠/展开 -->
                         <a class="catalog-toggle" href="#">CATALOG</a>
                     </h5>
+                    <!-- 目录列表容器，由JavaScript动态生成 -->
                     <ul class="catalog-body"></ul>
                 </div>
             </div>
         {% endif %}
 
+    <!-- ========================================
+         侧边栏容器
+         ========================================
+         显示：热门标签和友情链接
+         ======================================== -->
     <!-- Sidebar Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 sidebar-container">
 
+                <!-- ========================================
+                     热门标签区域
+                     ========================================
+                     显示文章数量超过阈值的标签
+                     ======================================== -->
                 <!-- Featured Tags -->
                 {% if site.featured-tags %}
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+        				<!-- 遍历所有标签 -->
         				{% for tag in site.tags %}
+                            <!-- 只显示文章数量大于阈值的标签 -->
                             {% if tag[1].size > {{site.featured-condition-size}} %}
                 				<a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
                                     {{ tag[0] }}
@@ -147,11 +254,17 @@ layout: default
                 </section>
                 {% endif %}
 
+                <!-- ========================================
+                     友情链接区域
+                     ========================================
+                     显示在_config.yml中配置的友情链接
+                     ======================================== -->
                 <!-- Friends Blog -->
                 {% if site.friends %}
                 <hr>
                 <h5>FRIENDS</h5>
                 <ul class="list-inline">
+                    <!-- 遍历友情链接列表 -->
                     {% for friend in site.friends %}
                         <li><a href="{{friend.href}}">{{friend.title}}</a></li>
                     {% endfor %}
@@ -163,14 +276,20 @@ layout: default
 </article>
 
 
+<!-- ============================================
+     Disqus评论系统初始化脚本
+     ============================================
+     异步加载Disqus评论框
+     ============================================ -->
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus_username}}";
-    var disqus_identifier = "{{page.id}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
+    /* * * 配置变量 * * */
+    var disqus_shortname = "{{site.disqus_username}}";     // Disqus用户名
+    var disqus_identifier = "{{page.id}}";                 // 页面唯一标识
+    var disqus_url = "{{site.url}}{{page.url}}";           // 页面URL
 
+    // 异步加载Disqus脚本
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
@@ -181,9 +300,18 @@ layout: default
 {% endif %}
 
 
+<!-- ============================================
+     Anchor.js锚点链接插件
+     ============================================
+     功能：为文章标题自动添加锚点链接
+     配置：在_config.yml中设置anchorjs: true
+     效果：鼠标悬停在标题上时显示#号，点击可复制链接
+     ============================================ -->
 {% if site.anchorjs %}
+<!-- 异步加载函数 -->
 <!-- async load function -->
 <script>
+    // 通用异步加载函数
     function async(u, c) {
       var d = document, t = 'script',
           o = d.createElement(t),
@@ -193,19 +321,24 @@ layout: default
       s.parentNode.insertBefore(o, s);
     }
 </script>
+<!-- anchor-js插件，文档：http://bryanbraun.github.io/anchorjs/ -->
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
+    // 异步加载anchor.js并初始化
     async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // BY Fix:去除标题前的'#' issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
         // anchors.options = {
         //   visible: 'always',
         //   placement: 'right',
         //   icon: '#'
         // };
+        // 为所有标题添加锚点，但排除页面头部的标题
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
+<!-- 锚点链接样式 -->
 <style>
+    /* 在大屏幕上将锚点链接放在左侧 */
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
         .anchorjs-link{

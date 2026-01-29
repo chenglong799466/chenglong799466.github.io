@@ -1,9 +1,25 @@
-<!-- Footer -->
+<!-- ============================================
+     页脚组件 (Footer Component)
+     ============================================
+     功能说明：
+     1. 显示社交媒体链接图标
+     2. 显示版权信息和GitHub Star按钮
+     3. 加载必要的JavaScript库
+     4. 初始化各种功能模块
+     ============================================ -->
 <footer>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- ========================================
+                     社交媒体链接区域
+                     ========================================
+                     根据_config.yml中的配置动态显示
+                     支持：RSS、简书、Twitter、知乎、微博、
+                          Facebook、GitHub、LinkedIn
+                     ======================================== -->
                 <ul class="list-inline text-center">
+                    <!-- RSS订阅链接 -->
                     {% if site.RSS %}
                     <li>
                         <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
@@ -14,17 +30,18 @@
                         </a>
                     </li>
                     {% endif %}
-                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    <!-- 简书链接 -->
                     {% if site.jianshu_username %}
-                            <li>
-                                <a target="_blank" href="https://www.jianshu.com/u/{{ site.jianshu_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa  fa-stack-1x fa-inverse">简</i>
-                                    </span>
-                                </a>
-                            </li>
+                    <li>
+                        <a target="_blank" href="https://www.jianshu.com/u/{{ site.jianshu_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">简</i>
+                            </span>
+                        </a>
+                    </li>
                     {% endif %}
+                    <!-- Twitter链接 -->
                     {% if site.twitter_username %}
                     <li>
                         <a href="https://twitter.com/{{ site.twitter_username }}">
@@ -36,7 +53,7 @@
                     </li>
                     {% endif %}
 
-                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    <!-- 知乎链接 -->
                     {% if site.zhihu_username %}
                     <li>
                         <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
@@ -47,6 +64,8 @@
                         </a>
                     </li>
                     {% endif %}
+                    
+                    <!-- 微博链接 -->
                     {% if site.weibo_username %}
                     <li>
                         <a target="_blank" href="http://weibo.com/{{ site.weibo_username }}">
@@ -58,7 +77,7 @@
                     </li>
                     {% endif %}
 
-
+                    <!-- Facebook链接 -->
                     {% if site.facebook_username %}
                     <li>
                         <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
@@ -69,6 +88,8 @@
                         </a>
                     </li>
                     {% endif %}
+                    
+                    <!-- GitHub链接 -->
                     {% if site.github_username %}
                     <li>
                         <a target="_blank" href="https://github.com/{{ site.github_username }}">
@@ -79,6 +100,8 @@
                         </a>
                     </li>
                     {% endif %}
+                    
+                    <!-- LinkedIn链接 -->
                     {% if site.linkedin_username %}
                     <li>
                         <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
@@ -90,6 +113,15 @@
                     </li>
                     {% endif %}
                 </ul>
+                
+                <!-- ========================================
+                     版权信息区域
+                     ========================================
+                     包含：
+                     - 版权声明
+                     - GitHub主题链接
+                     - GitHub Star按钮
+                     ======================================== -->
                 <p class="copyright text-muted">
                     Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
                     <br>
@@ -105,20 +137,27 @@
     </div>
 </footer>
 
-<!-- jQuery -->
+<!-- ============================================
+     核心JavaScript库
+     ============================================ -->
+<!-- jQuery库：JavaScript工具库，Bootstrap依赖 -->
 <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Bootstrap Core JavaScript -->
+<!-- Bootstrap核心JS：提供响应式组件交互功能 -->
 <script src="{{ "/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Custom Theme JavaScript -->
+<!-- 自定义主题JS：博客特定的交互功能 -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Service Worker -->
+<!-- ============================================
+     Service Worker注册
+     ============================================
+     功能：实现PWA离线缓存功能
+     注意：sw.js必须放在根目录，才能控制所有页面
+     ============================================ -->
 {% if site.service-worker %}
 <script type="text/javascript">
     if(navigator.serviceWorker){
-        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
         navigator.serviceWorker
             .register('/sw.js')
             .then((registration) => {console.log('Service Worker Registered. ', registration)})
@@ -128,7 +167,14 @@
 {% endif %}
 
 
-<!-- async load function -->
+<!-- ============================================
+     异步加载工具函数
+     ============================================
+     功能：异步加载外部JavaScript文件
+     参数：
+       u - 脚本URL
+       c - 加载完成后的回调函数
+     ============================================ -->
 <script>
     function async(u, c) {
       var d = document, t = 'script',
@@ -140,21 +186,33 @@
     }
 </script>
 
-<!-- jquery.tagcloud.js -->
+<!-- ============================================
+     标签云插件
+     ============================================
+     功能：在标签页面生成彩色标签云效果
+     只在tags.html页面加载
+     ============================================ -->
 <script>
-    // only load tagcloud.js in tag.html
+    // 检查页面是否有标签云容器
     if($('#tag_cloud').length !== 0){
+        // 异步加载标签云插件
         async('{{ "/js/jquery.tagcloud.js" | prepend: site.baseurl }}',function(){
+            // 配置标签云颜色渐变
             $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
+                color: {start: '#bbbbee', end: '#0085a1'},  // 从浅紫到深蓝
             };
+            // 初始化标签云
             $('#tag_cloud a').tagcloud();
         })
     }
 </script>
 
-<!--fastClick.js -->
+<!-- ============================================
+     FastClick插件
+     ============================================
+     功能：消除移动端点击300ms延迟
+     只应用于导航栏，提升响应速度
+     ============================================ -->
 <script>
     async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
         var $nav = document.querySelector("nav");
@@ -163,14 +221,19 @@
 </script>
 
 
-<!-- Google Analytics -->
+<!-- ============================================
+     Google Analytics统计
+     ============================================
+     功能：网站访问数据统计和分析
+     配置：在_config.yml中设置ga_track_id
+     ============================================ -->
 {% if site.ga_track_id %}
 <script>
-    // dynamic User by Hux
+    // 从配置文件读取GA ID和域名
     var _gaId = '{{ site.ga_track_id }}';
     var _gaDomain = '{{ site.ga_domain }}';
 
-    // Originial
+    // Google Analytics标准代码
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -182,13 +245,18 @@
 {% endif %}
 
 
-<!-- Baidu Tongji -->
+<!-- ============================================
+     百度统计
+     ============================================
+     功能：网站访问数据统计（国内用户）
+     配置：在_config.yml中设置ba_track_id
+     ============================================ -->
 {% if site.ba_track_id %}
 <script>
-    // dynamic User by Hux
+    // 从配置文件读取百度统计ID
     var _baId = '{{ site.ba_track_id }}';
 
-    // Originial
+    // 百度统计标准代码
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
@@ -201,48 +269,63 @@
 
 
 
-<!-- Side Catalog -->
+
+
+<!-- ============================================
+     侧边栏目录功能
+     ============================================
+     功能：为博客文章生成侧边栏目录导航
+     只在文章页面且page.catalog=true时加载
+     ============================================ -->
 {% if page.catalog %}
 <script type="text/javascript">
+    /**
+     * 生成文章目录
+     * @param {string} selector - 目录容器选择器
+     * 原理：扫描文章中的h1-h6标题，生成目录链接
+     */
     function generateCatalog (selector) {
         var P = $('div.post-container'),a,n,t,l,i,c;
+        // 查找所有标题元素
         a = P.find('h1,h2,h3,h4,h5,h6');
         a.each(function () {
-            n = $(this).prop('tagName').toLowerCase();
-            i = "#"+$(this).prop('id');
-            t = $(this).text();
+            n = $(this).prop('tagName').toLowerCase();  // 标题级别
+            i = "#"+$(this).prop('id');                 // 标题ID
+            t = $(this).text();                         // 标题文本
             c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
             l = $('<li class="'+n+'_nav"></li>').append(c);
             $(selector).append(l);
         });
-        return true;    
+        return true;
     }
 
+    // 生成目录
     generateCatalog(".catalog-body");
 
-    // toggle side catalog
+    // 目录折叠/展开切换
     $(".catalog-toggle").click((function(e){
         e.preventDefault();
         $('.side-catalog').toggleClass("fold")
     }))
 
-    /*
-     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
-     * Fork by Hux to support padding
+    /**
+     * 单页导航插件
+     * 功能：点击目录项平滑滚动到对应标题
+     * 文档：https://github.com/davist11/jQuery-One-Page-Nav
      */
     async("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
         $('.catalog-body').onePageNav({
-            currentClass: "active",
-            changeHash: !1,
-            easing: "swing",
-            filter: "",
-            scrollSpeed: 700,
-            scrollOffset: 0,
-            scrollThreshold: .2,
-            begin: null,
-            end: null,
-            scrollChange: null,
-            padding: 80
+            currentClass: "active",      // 当前激活项的类名
+            changeHash: !1,              // 不改变URL hash
+            easing: "swing",             // 滚动动画效果
+            filter: "",                  // 过滤器
+            scrollSpeed: 700,            // 滚动速度（毫秒）
+            scrollOffset: 0,             // 滚动偏移
+            scrollThreshold: .2,         // 滚动阈值
+            begin: null,                 // 开始回调
+            end: null,                   // 结束回调
+            scrollChange: null,          // 滚动变化回调
+            padding: 80                  // 顶部内边距（避免被导航栏遮挡）
         });
     });
 </script>

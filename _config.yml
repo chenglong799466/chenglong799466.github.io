@@ -28,8 +28,8 @@ paginate: 10
 exclude: ["less","node_modules"]
 anchorjs: true
 
-# Gems
-gems: [jekyll-paginate]
+# Plugins
+plugins: [jekyll-paginate]
 
 # Markdown settings
 markdown: kramdown
