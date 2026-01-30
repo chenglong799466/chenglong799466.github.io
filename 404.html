@@ -1,117 +1,158 @@
 ---
 layout: default
-title: 404 - 页面未找到
+title: 404
+description: 页面未找到
 permalink: /404.html
 ---
 
 <style>
+    /* ========== 404页面样式 ========== */
     .error-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
         text-align: center;
-        padding: 5rem 2rem;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        max-width: 700px;
-        margin: 0 auto;
+        padding: 48px 24px;
     }
     
     .error-code {
-        font-size: 10rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-size: 120px;
+        font-weight: 800;
+        color: var(--primary-color);
+        line-height: 1;
+        margin-bottom: 24px;
+        background: linear-gradient(135deg, var(--primary-color) 0%, #4080FF 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin-bottom: 1.5rem;
-        line-height: 1;
-        letter-spacing: -5px;
-        animation: float 3s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-20px);
-        }
     }
     
     .error-title {
-        font-size: 2.5rem;
-        color: #2c3e50;
-        margin-bottom: 1.5rem;
+        font-size: 32px;
         font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 16px;
     }
     
     .error-description {
-        font-size: 1.25rem;
-        color: #5a6c7d;
-        margin-bottom: 3rem;
-        line-height: 1.8;
+        font-size: 16px;
+        color: var(--text-secondary);
+        margin-bottom: 40px;
+        line-height: 1.6;
+        max-width: 500px;
     }
     
     .error-actions {
         display: flex;
-        gap: 1.5rem;
-        justify-content: center;
+        gap: 16px;
         flex-wrap: wrap;
+        justify-content: center;
     }
     
-    .error-button {
-        display: inline-flex;
-        align-items: center;
-        padding: 1.2rem 2.5rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #fff;
+    .btn {
+        display: inline-block;
+        padding: 12px 32px;
+        border-radius: 4px;
         text-decoration: none;
-        border-radius: 30px;
-        font-size: 1.1rem;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+    
+    .btn-primary {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+    }
+    
+    .btn-secondary:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+    
+    .error-suggestions {
+        margin-top: 48px;
+        padding: 32px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        max-width: 600px;
+        width: 100%;
+    }
+    
+    .error-suggestions h3 {
+        font-size: 18px;
         font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        color: var(--text-primary);
+        margin-bottom: 16px;
     }
     
-    .error-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    .error-suggestions ul {
+        list-style: none;
+        text-align: left;
     }
     
-    .error-button.secondary {
-        background: rgba(102, 126, 234, 0.1);
-        color: #667eea;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    .error-suggestions li {
+        margin-bottom: 12px;
+        padding-left: 24px;
+        position: relative;
+        color: var(--text-secondary);
+        font-size: 14px;
     }
     
-    .error-button.secondary:hover {
-        background: rgba(102, 126, 234, 0.15);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+    .error-suggestions li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+        font-weight: bold;
     }
     
+    .error-suggestions a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    
+    .error-suggestions a:hover {
+        text-decoration: underline;
+    }
+    
+    /* 响应式 */
     @media (max-width: 768px) {
-        .error-container {
-            padding: 3rem 1.5rem;
-            border-radius: 15px;
-        }
-        
         .error-code {
-            font-size: 6rem;
-            letter-spacing: -3px;
+            font-size: 80px;
         }
         
         .error-title {
-            font-size: 1.8rem;
+            font-size: 24px;
         }
         
         .error-description {
-            font-size: 1.05rem;
+            font-size: 14px;
         }
         
-        .error-button {
-            padding: 1rem 2rem;
-            font-size: 1rem;
+        .error-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .btn {
+            width: 100%;
+        }
+        
+        .error-suggestions {
+            padding: 20px;
         }
     }
 </style>
@@ -119,10 +160,23 @@ permalink: /404.html
 <div class="error-container">
     <div class="error-code">404</div>
     <h1 class="error-title">页面未找到</h1>
-    <p class="error-description">抱歉，您访问的页面不存在或已被删除。</p>
+    <p class="error-description">
+        抱歉，您访问的页面不存在或已被移除。<br>
+        请检查URL是否正确，或返回首页继续浏览。
+    </p>
     
     <div class="error-actions">
-        <a href="{{ site.baseurl }}/" class="error-button">返回首页</a>
-        <a href="{{ site.baseurl }}/tags.html" class="error-button secondary">浏览标签</a>
+        <a href="{{ site.baseurl }}/" class="btn btn-primary">返回首页</a>
+        <a href="{{ site.baseurl }}/pages/tags.html" class="btn btn-secondary">浏览文章</a>
+    </div>
+    
+    <div class="error-suggestions">
+        <h3>您可能想要：</h3>
+        <ul>
+            <li><a href="{{ site.baseurl }}/">访问首页</a> - 查看最新文章</li>
+            <li><a href="{{ site.baseurl }}/pages/tags.html">浏览标签</a> - 按标签查找文章</li>
+            <li><a href="{{ site.baseurl }}/pages/archive.html">查看归档</a> - 按时间浏览所有文章</li>
+            <li><a href="{{ site.baseurl }}/pages/about.html">关于我</a> - 了解更多信息</li>
+        </ul>
     </div>
 </div>

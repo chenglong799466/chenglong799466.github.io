@@ -1,51 +1,99 @@
 ---
-layout: page
-title: 关于
-description: 关于我和这个博客
-permalink: /about.html
+layout: default
+title: 关于我
+description: 个人简介
 ---
 
 <style>
+    /* ========== 关于页面样式 ========== */
+    .about-container {
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 48px;
+    }
+    
+    .about-header {
+        text-align: center;
+        margin-bottom: 48px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .about-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 24px;
+        border: 4px solid var(--primary-color);
+        object-fit: cover;
+    }
+    
+    .about-name {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 12px;
+    }
+    
+    .about-title {
+        font-size: 18px;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+    }
+    
+    .about-social {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+    }
+    
+    .about-social a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+    
+    .about-social a:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+    
     .about-content {
-        max-width: 900px;
+        max-width: 800px;
         margin: 0 auto;
     }
     
     .about-section {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 16px;
-        padding: 3rem;
-        margin-bottom: 2.5rem;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 40px;
     }
     
-    .about-section:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+    .about-section:last-child {
+        margin-bottom: 0;
     }
     
     .about-section h2 {
-        font-size: 2rem;
-        color: #2c3e50;
-        margin-bottom: 1.5rem;
-        padding-bottom: 1rem;
-        border-bottom: 3px solid transparent;
-        border-image: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border-image-slice: 1;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--primary-color);
+        display: inline-block;
     }
     
     .about-section p {
-        font-size: 1.15rem;
-        line-height: 1.9;
-        color: #5a6c7d;
-        margin-bottom: 1.2rem;
+        font-size: 16px;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin-bottom: 16px;
     }
     
     .about-section ul {
@@ -54,108 +102,145 @@ permalink: /about.html
     }
     
     .about-section li {
-        padding: 0.8rem 0;
-        font-size: 1.15rem;
-        color: #5a6c7d;
-        display: flex;
-        align-items: center;
-        transition: all 0.3s ease;
+        font-size: 16px;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+        padding-left: 24px;
+        position: relative;
     }
     
-    .about-section li:hover {
-        color: #667eea;
-        transform: translateX(5px);
-    }
-    
-    .about-section li:before {
-        content: "✓";
-        color: #fff;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .about-section li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
         font-weight: bold;
-        margin-right: 1rem;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.85rem;
-        flex-shrink: 0;
     }
     
-    .social-links {
-        display: flex;
-        gap: 1.2rem;
-        margin-top: 1.5rem;
-        flex-wrap: wrap;
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
     }
     
-    .social-link {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.8rem 1.5rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #fff;
-        text-decoration: none;
-        border-radius: 30px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        font-weight: 600;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    .skill-item {
+        background: var(--bg-secondary);
+        padding: 16px;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-primary);
     }
     
-    .social-link:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    }
-    
+    /* 响应式 */
     @media (max-width: 768px) {
-        .about-section {
-            padding: 2rem;
-            border-radius: 12px;
+        .about-container {
+            padding: 24px;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+        }
+        
+        .about-name {
+            font-size: 24px;
+        }
+        
+        .about-title {
+            font-size: 16px;
+        }
+        
+        .about-social {
+            flex-direction: column;
+            align-items: center;
         }
         
         .about-section h2 {
-            font-size: 1.6rem;
+            font-size: 20px;
         }
         
-        .about-section p,
-        .about-section li {
-            font-size: 1.05rem;
+        .skills-grid {
+            grid-template-columns: 1fr;
         }
     }
 </style>
 
-<div class="about-content">
-    <div class="about-section">
-        <h2>👋 关于我</h2>
-        <p>{{ site.sidebar-about-description }}</p>
-        <p>这是一个记录技术学习和生活感悟的个人博客。</p>
-    </div>
-    
-    <div class="about-section">
-        <h2>💻 技术栈</h2>
-        <ul>
-            <li>后端开发：Go、Java</li>
-            <li>容器技术：Kubernetes、Docker</li>
-            <li>数据库：MySQL、Redis</li>
-            <li>其他：Spring、微服务架构</li>
-        </ul>
-    </div>
-    
-    <div class="about-section">
-        <h2>📝 关于博客</h2>
-        <p>这个博客使用 Jekyll 构建，托管在 GitHub Pages 上。</p>
-        <p>主要分享技术文章、学习笔记和个人思考。</p>
-    </div>
-    
-    <div class="about-section">
-        <h2>📫 联系方式</h2>
-        <p>Email: {{ site.email }}</p>
-        <div class="social-links">
-            <a href="{{ site.github_repo }}" target="_blank" class="social-link">GitHub</a>
+<div class="about-container">
+    <!-- 头部信息 -->
+    <div class="about-header">
+        <img src="{{ site.sidebar-avatar }}" alt="Avatar" class="about-avatar">
+        <h1 class="about-name">{{ site.title }}</h1>
+        <p class="about-title">大模型技术研究者 | 全栈开发工程师</p>
+        <div class="about-social">
+            <a href="{{ site.github_repo }}" target="_blank">
+                <span>🔗</span>
+                <span>GitHub</span>
+            </a>
             {% if site.zhihu_username %}
-            <a href="https://www.zhihu.com/people/{{ site.zhihu_username }}" target="_blank" class="social-link">知乎</a>
+            <a href="https://www.zhihu.com/people/{{ site.zhihu_username }}" target="_blank">
+                <span>📝</span>
+                <span>知乎</span>
+            </a>
             {% endif %}
+            <a href="mailto:{{ site.email }}">
+                <span>✉️</span>
+                <span>邮箱</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 内容区域 -->
+    <div class="about-content">
+        <!-- 个人简介 -->
+        <div class="about-section">
+            <h2>👋 关于我</h2>
+            <p>{{ site.sidebar-about-description }}</p>
+            <p>{{ site.description }}</p>
+            <p>专注于大模型技术研究与应用，热衷于探索人工智能在各个领域的落地实践。在云原生、微服务架构、容器编排等方向有丰富的实践经验。</p>
+        </div>
+        
+        <!-- 技术栈 -->
+        <div class="about-section">
+            <h2>💻 技术栈</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Go 语言</div>
+                <div class="skill-item">Java</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">Kubernetes</div>
+                <div class="skill-item">Docker</div>
+                <div class="skill-item">MySQL</div>
+                <div class="skill-item">Redis</div>
+                <div class="skill-item">Git</div>
+                <div class="skill-item">Linux</div>
+                <div class="skill-item">大模型应用</div>
+            </div>
+        </div>
+        
+        <!-- 研究方向 -->
+        <div class="about-section">
+            <h2>🔬 研究方向</h2>
+            <ul>
+                <li>大语言模型（LLM）应用开发与优化</li>
+                <li>云原生架构设计与实践</li>
+                <li>Kubernetes 容器编排与运维</li>
+                <li>微服务架构与分布式系统</li>
+                <li>数据库性能优化与架构设计</li>
+            </ul>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div class="about-section">
+            <h2>📬 联系我</h2>
+            <p>如果你对我的文章感兴趣，或者想要交流技术问题，欢迎通过以下方式联系我：</p>
+            <ul>
+                <li>邮箱：{{ site.email }}</li>
+                <li>GitHub：<a href="{{ site.github_repo }}" target="_blank">{{ site.github_repo }}</a></li>
+                {% if site.zhihu_username %}
+                <li>知乎：<a href="https://www.zhihu.com/people/{{ site.zhihu_username }}" target="_blank">@{{ site.zhihu_username }}</a></li>
+                {% endif %}
+            </ul>
         </div>
     </div>
 </div>

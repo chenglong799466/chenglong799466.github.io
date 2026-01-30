@@ -16,346 +16,428 @@
     <link rel="icon" href="{{ site.baseurl }}/img/favicon.ico">
     <link rel="apple-touch-icon" href="{{ site.baseurl }}/img/apple-touch-icon.png">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
     <!-- CSS -->
     <style>
+        /* ========== 基础样式 ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            line-height: 1.7;
-            color: #2c3e50;
-            background: #0f0c29;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            position: relative;
+        :root {
+            --primary-color: #165DFF;
+            --bg-color: #FFFFFF;
+            --bg-secondary: #F5F7FA;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #E5E6EB;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
         
-        body::before {
-            content: '';
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-color);
+            font-size: 16px;
+        }
+        
+        /* ========== 顶部导航栏 ========== */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(252, 70, 107, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(99, 125, 255, 0.3) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, rgba(99, 125, 255, 0.1) 0%, rgba(252, 70, 107, 0.1) 100%);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
             right: 0;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.5;
-            pointer-events: none;
+            height: 64px;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
         }
         
-        nav {
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 24px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 0;
-            position: relative;
-            z-index: 1;
+            justify-content: space-between;
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
             text-decoration: none;
-            letter-spacing: -0.5px;
-            transition: all 0.3s ease;
-            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
-            position: relative;
-        }
-        
-        .logo::before {
-            content: '✨';
-            margin-right: 0.5rem;
-            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.8));
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s;
         }
         
         .logo:hover {
-            transform: scale(1.05) translateY(-2px);
-            filter: drop-shadow(0 5px 15px rgba(102, 126, 234, 0.4));
+            opacity: 0.8;
         }
         
-        .nav-links {
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            border-radius: 6px;
             display: flex;
-            gap: 2.5rem;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
             list-style: none;
         }
         
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.9);
+        .nav-menu a {
+            color: var(--text-primary);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s;
             position: relative;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
         }
         
-        .nav-links a::before {
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-menu a::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: -8px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+            background: var(--primary-color);
+            transition: width 0.2s;
         }
         
-        .nav-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
         }
         
-        .nav-links a:hover::before {
-            opacity: 1;
+        /* ========== 主体布局 ========== */
+        .main-wrapper {
+            margin-top: 64px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 32px 24px;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 32px;
+            min-height: calc(100vh - 64px - 200px);
         }
         
-        .nav-links a:hover::after {
-            width: 80%;
+        /* ========== 左侧边栏 ========== */
+        .sidebar {
+            position: sticky;
+            top: 96px;
+            height: fit-content;
         }
         
-        /* Main Content */
-        main {
-            min-height: calc(100vh - 250px);
-            padding: 3rem 0;
-            position: relative;
-            z-index: 1;
+        .sidebar-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
         
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, rgba(15, 12, 41, 0.95) 0%, rgba(48, 43, 99, 0.95) 100%);
-            backdrop-filter: blur(20px);
-            color: rgba(255, 255, 255, 0.9);
+        .sidebar-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-list {
+            list-style: none;
+        }
+        
+        .sidebar-list li {
+            margin-bottom: 12px;
+        }
+        
+        .sidebar-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+            display: block;
+            padding: 4px 0;
+        }
+        
+        .sidebar-list a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* 标签云 */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag-cloud a {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .tag-cloud a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        /* 近期更新 */
+        .recent-posts {
+            list-style: none;
+        }
+        
+        .recent-posts li {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .recent-posts li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .recent-posts a {
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .recent-posts .post-date {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        /* ========== 主内容区 ========== */
+        .main-content {
+            min-width: 0;
+        }
+        
+        /* ========== 底部页脚 ========== */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 48px 24px 24px;
+            margin-top: 64px;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
             text-align: center;
-            padding: 4rem 0 2rem;
-            margin-top: 5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-            opacity: 0.3;
-            pointer-events: none;
-        }
-        
-        footer::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                #667eea 25%, 
-                #764ba2 50%, 
-                #667eea 75%, 
-                transparent 100%);
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
-        }
-        
-        .footer-content {
-            position: relative;
-            z-index: 1;
         }
         
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 24px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         
         .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .footer-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            font-size: 14px;
+            transition: color 0.2s;
         }
         
         .footer-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+            color: var(--primary-color);
         }
         
-        .footer-links a:hover::before {
-            opacity: 1;
+        .footer-info {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
         }
         
-        footer p {
-            margin: 0.5rem 0;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        footer a {
-            color: rgba(255, 255, 255, 0.9);
+        .footer-info a {
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            transition: color 0.2s;
         }
         
-        footer a:hover {
-            color: #667eea;
-            text-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
+        .footer-info a:hover {
+            color: var(--primary-color);
         }
         
-        .footer-divider {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            margin: 2rem auto;
-            border-radius: 2px;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        /* ========== 响应式设计 ========== */
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
         }
         
-        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
+            .header-container {
+                padding: 0 16px;
             }
             
-            .nav-links a {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.8rem;
+            .nav-menu {
+                gap: 16px;
             }
             
-            .container {
-                padding: 0 15px;
+            .nav-menu a {
+                font-size: 14px;
+            }
+            
+            .main-wrapper {
+                padding: 20px 16px;
+                gap: 20px;
+            }
+            
+            .sidebar {
+                grid-template-columns: 1fr;
             }
             
             .logo {
-                font-size: 1.4rem;
+                font-size: 18px;
             }
             
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
             }
+        }
+        
+        /* ========== 工具类 ========== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="header-container">
+            <a href="{{ site.baseurl }}/" class="logo">
+                <div class="logo-icon">C</div>
+                <span>{{ site.title }}</span>
+            </a>
             <nav>
-                <a href="{{ site.baseurl }}/" class="logo">{{ site.title }}</a>
-                <ul class="nav-links">
-                    <li><a href="{{ site.baseurl }}/">首页</a></li>
-                    <li><a href="{{ site.baseurl }}/tags.html">标签</a></li>
-                    <li><a href="{{ site.baseurl }}/about.html">关于</a></li>
+                <ul class="nav-menu">
+                    <li><a href="{{ site.baseurl }}/" {% if page.url == '/' %}class="active"{% endif %}>首页</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/tags.html" {% if page.url contains '/tags' %}class="active"{% endif %}>文章</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/about.html" {% if page.url contains '/about' %}class="active"{% endif %}>关于我</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/archive.html" {% if page.url contains '/archive' %}class="active"{% endif %}>归档</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            {{ content }}
-        </div>
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <a href="{{ site.baseurl }}/">首页</a>
-                    <a href="{{ site.baseurl }}/tags.html">标签</a>
-                    <a href="{{ site.baseurl }}/about.html">关于</a>
-                    <a href="{{ site.github_repo }}" target="_blank">GitHub</a>
+    <!-- 主体内容 -->
+    <div class="main-wrapper">
+        <!-- 左侧边栏 -->
+        <aside class="sidebar">
+            <!-- 文章分类 -->
+            <div class="sidebar-section">
+                <h3>📂 分类</h3>
+                <ul class="sidebar-list">
+                    <li><a href="{{ site.baseurl }}/pages/tags.html#Kubernetes">Kubernetes</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/tags.html#Go">Go 语言</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/tags.html#MySQL">MySQL</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/tags.html#Git">Git</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/tags.html#Linux">Linux</a></li>
+                </ul>
+            </div>
+            
+            <!-- 标签云 -->
+            <div class="sidebar-section">
+                <h3>🏷️ 标签</h3>
+                <div class="tag-cloud">
+                    {% assign sorted_tags = site.tags | sort %}
+                    {% for tag in sorted_tags limit:15 %}
+                    <a href="{{ site.baseurl }}/pages/tags.html#{{ tag[0] }}">{{ tag[0] }}</a>
+                    {% endfor %}
                 </div>
-                <div class="footer-divider"></div>
+            </div>
+            
+            <!-- 近期更新 -->
+            <div class="sidebar-section">
+                <h3>📝 近期更新</h3>
+                <ul class="recent-posts">
+                    {% for post in site.posts limit:5 %}
+                    <li>
+                        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                        <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="main-content">
+            {{ content }}
+        </main>
+    </div>
+    
+    <!-- 底部页脚 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="{{ site.baseurl }}/">首页</a>
+                <a href="{{ site.baseurl }}/pages/tags.html">文章</a>
+                <a href="{{ site.baseurl }}/pages/about.html">关于我</a>
+                <a href="{{ site.baseurl }}/pages/archive.html">归档</a>
+                <a href="{{ site.github_repo }}" target="_blank">GitHub</a>
+            </div>
+            <div class="footer-info">
                 <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
-                <p>Built with ❤️ using <a href="https://jekyllrb.com" target="_blank">Jekyll</a></p>
+                <p>专注于大模型技术与应用 | Built with Jekyll</p>
             </div>
         </div>
     </footer>

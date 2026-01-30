@@ -1,17 +1,13 @@
 # Site settings
-title: Blog
-SEOTitle: chenglong的博客 | CL Blog
+title: ChengLong's Blog
+SEOTitle: ChengLong的技术博客 | 大模型技术研究
 header-img: img/abstract-bg-02.jpg
 email: chenglong799466@gmail.com
-description: "Every failure is leading towards success."
-keyword: "CL Blog, chenglong的博客, chenglong, Go , Java"
+description: "专注于大模型技术研究与应用 | 云原生 | Kubernetes | Go"
+keyword: "大模型, LLM, AI, Kubernetes, Go, Java, 云原生, 技术博客"
 url: "https://chenglong799466.github.io"
 baseurl: ""
 github_repo: "https://github.com/chenglong799466/chenglong799466.github.io"
-
-# Available background images for posts and pages
-# Options: img/post-bg-coffee.jpeg (default), img/abstract-bg-01.jpg, img/abstract-bg-02.jpg, 
-# img/abstract-bg-03.jpg, img/nature-bg-04.jpg, img/nature-bg-05.jpg, img/nature-bg-06.jpg
 
 # Sidebar settings
 sidebar: true
@@ -36,6 +32,7 @@ markdown: kramdown
 highlighter: rouge
 kramdown:
   input: GFM
+  syntax_highlighter: rouge
 
 # 评论系统
 gitalk:
@@ -51,16 +48,16 @@ featured-tags: true
 featured-condition-size: 1
 
 # Progressive Web Apps
-chrome-tab-theme-color: "#000000"
+chrome-tab-theme-color: "#165DFF"
 service-worker: true
 
 # Friends
 friends:
-  - title: "spring"
+  - title: "Spring"
     href: "https://spring.io/"
-  - title: "java"
+  - title: "Java"
     href: "https://dev.java/"
-  - title: "mysql"
+  - title: "MySQL"
     href: "https://www.mysql.com/"
-  - title: "k8s"
+  - title: "Kubernetes"
     href: "https://kubernetes.io/"

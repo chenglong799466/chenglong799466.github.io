@@ -1,202 +1,137 @@
-# 个人博客
+# ChengLong's Blog
 
-这是一个基于 Jekyll 构建的个人博客，托管在 GitHub Pages 上。
+> 基于 Jekyll 的极简高级风个人技术博客，专注于大模型技术研究与应用
 
-## 🎨 特点
+## 📖 项目简介
 
-- ✨ 全新的简洁现代设计
-- 📱 完全响应式布局，支持移动端
-- 🏷️ 标签系统，方便文章分类
-- 📄 分页功能，优化浏览体验
-- 🎯 简洁的代码结构，易于维护
+这是一个采用极简设计风格的个人技术博客，使用 Jekyll 静态网站生成器构建，部署在 GitHub Pages 上。博客专注于大模型技术、云原生、Kubernetes、Go 语言等技术领域的研究与分享。
+
+## ✨ 设计特点
+
+### 视觉设计
+- **极简风格**：简约大气，符合程序员个人博客的专业调性
+- **科技感轻量**：拒绝冗余元素，留白合理
+- **配色方案**：
+  - 主色调：`#165DFF` (低饱和蓝色)
+  - 背景色：`#FFFFFF` (纯白)
+  - 辅助色：`#F5F7FA` (浅灰)
+  - 文字色：`#333333` / `#666666` (深灰/浅灰)
+
+### 布局结构
+- **顶部导航栏**：固定顶部，包含 Logo 和主导航菜单
+- **左侧边栏**：文章分类、标签云、近期更新
+- **主内容区**：文章列表或详情内容
+- **底部页脚**：版权信息、GitHub 链接等
+
+### 排版规范
+- **字体**：Inter / Noto Sans SC (思源黑体)
+- **字号层级**：H1: 32px, H2: 24px, H3: 20px, H4: 18px, 正文: 16px
+- **行高**：1.7-1.8
+- **圆角**：8px (卡片)、4px (按钮/标签)
 
 ## 📁 项目结构
 
 ```
 .
-├── _layouts/           # 布局模板
-│   ├── default.html   # 基础布局（包含头部、导航、底部）
-│   ├── post.html      # 文章页面布局
-│   └── page.html      # 静态页面布局
-├── _posts/            # 博客文章（Markdown格式）
-├── pages/             # 静态页面
-│   ├── tags.html     # 标签页
-│   └── about.html    # 关于页
-├── _config.yml        # Jekyll 配置文件
-├── index.html         # 首页（文章列表）
-├── 404.html           # 404错误页
-└── img/               # 图片资源
+├── _config.yml          # Jekyll 配置文件
+├── _layouts/            # 页面布局模板
+│   ├── default.html     # 默认布局（三栏结构）
+│   ├── post.html        # 文章详情页布局
+│   └── page.html        # 普通页面布局
+├── _posts/              # 博客文章（Markdown 格式）
+├── pages/               # 独立页面
+│   ├── about.html       # 关于我
+│   ├── tags.html        # 标签页
+│   └── archive.html     # 归档页
+├── css/                 # 样式文件
+├── js/                  # JavaScript 文件
+├── img/                 # 图片资源
+├── index.html           # 首页
+├── 404.html             # 404 错误页
+└── README.md            # 项目说明
 ```
 
-## 📝 写作指南
+## 🚀 快速开始
 
-### 创建新文章
+### 本地运行
 
-1. 在 `_posts` 目录下创建新文件
-2. 文件命名格式：`YYYY-MM-DD-标题.md`
-3. 文件开头添加 Front Matter：
+1. **安装 Jekyll**
+```bash
+gem install jekyll bundler
+```
 
+2. **克隆项目**
+```bash
+git clone https://github.com/chenglong799466/chenglong799466.github.io.git
+cd chenglong799466.github.io
+```
+
+3. **安装依赖**
+```bash
+bundle install
+```
+
+4. **启动本地服务器**
+```bash
+jekyll serve
+```
+
+5. **访问博客**
+打开浏览器访问 `http://localhost:4000`
+
+### 发布文章
+
+1. 在 `_posts` 目录下创建新文件，文件名格式：`YYYY-MM-DD-title.md`
+
+2. 添加 Front Matter：
 ```yaml
 ---
 layout: post
 title: "文章标题"
 subtitle: "文章副标题（可选）"
 date: 2024-01-01
-author: "作者名（可选）"
-tags:
-  - 标签1
-  - 标签2
+author: "作者名"
+tags: [标签1, 标签2]
 ---
 
 文章内容...
 ```
 
-### Front Matter 字段说明
+3. 提交并推送到 GitHub
 
-- `layout`: 布局模板，文章使用 `post`
-- `title`: 文章标题（必需）
-- `subtitle`: 文章副标题（可选）
-- `date`: 发布日期（必需）
-- `author`: 作者名（可选）
-- `tags`: 标签列表（可选）
-
-## 🚀 本地开发
-
-### 安装依赖
-
-```bash
-# 安装 Ruby 和 Bundler
-gem install bundler
-
-# 安装 Jekyll 和依赖
-bundle install
-```
-
-### 本地运行
-
-```bash
-# 启动本地服务器
-bundle exec jekyll serve
-
-# 访问 http://localhost:4000
-```
-
-### 构建静态文件
-
-```bash
-bundle exec jekyll build
-```
-
-## 🌐 部署
-
-### GitHub Pages 部署
-
-1. 将代码推送到 GitHub 仓库
-2. 在仓库设置中启用 GitHub Pages
-3. 选择 `main` 分支作为源
-4. 访问 `https://用户名.github.io`
-
-### 提交更新
-
-```bash
-git add .
-git commit -m "更新博客内容"
-git push origin main
-```
-
-## 🎨 自定义
+## 🎨 自定义配置
 
 ### 修改网站信息
+编辑 `_config.yml` 文件
 
-编辑 `_config.yml` 文件：
-
-```yaml
-title: 你的博客名称
-description: 博客描述
-email: 你的邮箱
-url: "https://你的域名"
-```
-
-### 修改样式
-
-所有样式都内嵌在各个 HTML 文件的 `<style>` 标签中，可以直接修改：
-
-- `_layouts/default.html` - 全局样式（头部、导航、底部）
-- `_layouts/post.html` - 文章页面样式
-- `index.html` - 首页样式
-- `tags.html` - 标签页样式
-
-### 修改颜色主题
-
-主要颜色变量：
-
-- 主色调：`#0066cc`（蓝色）
-- 背景色：`#f5f5f5`（浅灰）
-- 文字色：`#333`（深灰）
-- 次要文字：`#666`（中灰）
+### 修改配色
+在 `_layouts/default.html` 中的 CSS 变量部分修改
 
 ## 📄 页面说明
 
-### 首页 (index.html)
+- **首页**：展示最新文章列表
+- **文章详情页**：文章内容、标签、导航
+- **标签页**：标签云和分类文章列表
+- **归档页**：按年份时间线展示
+- **关于页**：个人简介和联系方式
 
-- 展示最新的博客文章列表
-- 支持分页（每页10篇）
-- 显示文章标题、副标题、日期、标签
-- 卡片式设计，悬停效果
+## 🛠️ 技术栈
 
-### 标签页 (tags.html)
+- Jekyll
+- Liquid
+- 原生 CSS
+- GitHub Pages
 
-- 标签云展示所有标签
-- 按标签分组显示文章
-- 点击标签可跳转到对应分组
+## 📱 响应式设计
 
-### 关于页 (about.html)
+- 桌面端：≥1024px - 三栏布局
+- 平板端：768px-1023px - 两栏布局
+- 移动端：<768px - 单栏布局
 
-- 个人介绍
-- 技术栈展示
-- 联系方式
-
-### 文章页 (post.html)
-
-- 文章标题和元信息
-- 文章内容（支持Markdown）
-- 文章标签
-- 上一篇/下一篇导航
-
-## 🔧 技术栈
-
-- **Jekyll**: 静态网站生成器
-- **Liquid**: 模板语言
-- **Markdown**: 文章编写格式
-- **HTML/CSS**: 页面结构和样式
-- **GitHub Pages**: 托管平台
-
-## 📚 参考资源
-
-- [Jekyll 官方文档](https://jekyllrb.com/)
-- [Liquid 模板语言](https://shopify.github.io/liquid/)
-- [Markdown 语法](https://www.markdownguide.org/)
-- [GitHub Pages 文档](https://docs.github.com/en/pages)
-
-## 📝 更新日志
-
-### 2026-01-29
-
-- 🎉 全新设计的博客系统
-- ✨ 简洁现代的界面
-- 📱 完全响应式布局
-- 🏷️ 优化的标签系统
-- 📄 改进的分页功能
-
-## 📧 联系方式
-
-- Email: chenglong799466@gmail.com
-- GitHub: [chenglong799466](https://github.com/chenglong799466)
-
-## 📄 许可证
+## 📝 许可证
 
 MIT License
 
 ---
 
-**享受写作，分享知识！** ✍️
+**Built with ❤️ using Jekyll**

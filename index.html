@@ -3,248 +3,224 @@ layout: default
 ---
 
 <style>
-    .hero {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        color: #2c3e50;
-        padding: 5rem 3rem;
-        border-radius: 20px;
-        text-align: center;
-        margin-bottom: 4rem;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        position: relative;
-        overflow: hidden;
+    /* ========== 首页样式 ========== */
+    .page-header {
+        margin-bottom: 40px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border-color);
     }
     
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    .page-title {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 12px;
     }
     
-    .hero h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1.5rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        letter-spacing: -1px;
+    .page-description {
+        font-size: 16px;
+        color: var(--text-secondary);
+        line-height: 1.6;
     }
     
-    .hero p {
-        font-size: 1.4rem;
-        color: #5a6c7d;
-        font-weight: 400;
-        line-height: 1.8;
-    }
-    
+    /* 文章列表 */
     .posts-list {
-        display: grid;
-        gap: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
     }
     
     .post-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 16px;
-        padding: 2.5rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 28px;
         text-decoration: none;
         color: inherit;
         display: block;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .post-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        transition: height 0.4s ease;
+        transition: all 0.2s ease;
     }
     
     .post-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
     }
     
-    .post-card:hover::before {
-        height: 100%;
+    .post-card-header {
+        margin-bottom: 16px;
     }
     
     .post-card-title {
-        font-size: 2rem;
+        font-size: 24px;
         font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 0.8rem;
+        color: var(--text-primary);
+        margin-bottom: 8px;
         line-height: 1.4;
-        transition: color 0.3s ease;
+        transition: color 0.2s;
     }
     
     .post-card:hover .post-card-title {
-        color: #667eea;
+        color: var(--primary-color);
     }
     
     .post-card-subtitle {
-        font-size: 1.15rem;
-        color: #5a6c7d;
-        margin-bottom: 1.2rem;
+        font-size: 16px;
+        color: var(--text-secondary);
         line-height: 1.6;
     }
     
     .post-card-meta {
         display: flex;
-        gap: 2rem;
-        color: #95a5a6;
-        font-size: 0.95rem;
-        margin-bottom: 1.2rem;
-        font-weight: 500;
+        gap: 20px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        margin-bottom: 16px;
     }
     
     .post-card-meta span {
         display: flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 4px;
     }
     
     .post-card-excerpt {
-        color: #5a6c7d;
+        color: var(--text-secondary);
         line-height: 1.8;
-        margin-bottom: 1.5rem;
-        font-size: 1.05rem;
+        margin-bottom: 16px;
+        font-size: 15px;
     }
     
     .post-card-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.6rem;
+        gap: 8px;
     }
     
     .post-card-tag {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-        color: #667eea;
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        border: 1px solid rgba(102, 126, 234, 0.2);
-        transition: all 0.3s ease;
+        display: inline-block;
+        padding: 4px 12px;
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        font-size: 13px;
+        border-radius: 4px;
+        transition: all 0.2s;
     }
     
-    .post-card-tag:hover {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #fff;
-        transform: translateY(-2px);
+    .post-card:hover .post-card-tag {
+        background: rgba(22, 93, 255, 0.1);
+        color: var(--primary-color);
     }
     
+    /* 分页 */
     .pagination {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 1rem;
-        margin-top: 4rem;
+        gap: 12px;
+        margin-top: 48px;
+        padding-top: 32px;
+        border-top: 1px solid var(--border-color);
     }
     
     .pagination a,
     .pagination span {
-        padding: 0.8rem 1.5rem;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 10px;
+        padding: 8px 16px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
         text-decoration: none;
-        color: #2c3e50;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        color: var(--text-primary);
+        font-size: 14px;
         font-weight: 500;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.2s;
     }
     
     .pagination a:hover {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
     }
     
     .pagination .current {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #fff;
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
     }
     
+    .pagination .disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+    
+    /* 空状态 */
+    .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        color: var(--text-secondary);
+    }
+    
+    .empty-state-icon {
+        font-size: 64px;
+        margin-bottom: 16px;
+    }
+    
+    .empty-state-text {
+        font-size: 16px;
+    }
+    
+    /* 响应式 */
     @media (max-width: 768px) {
-        .hero {
-            padding: 3rem 2rem;
-            border-radius: 15px;
-        }
-        
-        .hero h1 {
-            font-size: 2.2rem;
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
+        .page-title {
+            font-size: 24px;
         }
         
         .post-card {
-            padding: 1.8rem;
-            border-radius: 12px;
+            padding: 20px;
         }
         
         .post-card-title {
-            font-size: 1.5rem;
+            font-size: 20px;
         }
         
         .post-card-meta {
             flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .pagination {
-            flex-wrap: wrap;
+            gap: 8px;
         }
     }
 </style>
 
-<!-- Hero Section -->
-<div class="hero">
-    <h1>{{ site.title }}</h1>
-    <p>{{ site.description }}</p>
+<!-- 页面头部 -->
+<div class="page-header">
+    <h1 class="page-title">最新文章</h1>
+    <p class="page-description">{{ site.description }}</p>
 </div>
 
-<!-- Posts List -->
+<!-- 文章列表 -->
+{% if paginator.posts.size > 0 %}
 <div class="posts-list">
     {% for post in paginator.posts %}
     <a href="{{ post.url | prepend: site.baseurl }}" class="post-card">
-        <h2 class="post-card-title">{{ post.title }}</h2>
-        {% if post.subtitle %}
-        <p class="post-card-subtitle">{{ post.subtitle }}</p>
-        {% endif %}
+        <div class="post-card-header">
+            <h2 class="post-card-title">{{ post.title }}</h2>
+            {% if post.subtitle %}
+            <p class="post-card-subtitle">{{ post.subtitle }}</p>
+            {% endif %}
+        </div>
+        
         <div class="post-card-meta">
-            <span>📅 {{ post.date | date: "%Y年%m月%d日" }}</span>
+            <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
             {% if post.author %}
             <span>✍️ {{ post.author }}</span>
             {% endif %}
         </div>
+        
         {% if post.excerpt %}
-        <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+        <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
         {% endif %}
+        
         {% if post.tags %}
         <div class="post-card-tags">
-            {% for tag in post.tags %}
+            {% for tag in post.tags limit:5 %}
             <span class="post-card-tag">{{ tag }}</span>
             {% endfor %}
         </div>
@@ -253,17 +229,29 @@ layout: default
     {% endfor %}
 </div>
 
-<!-- Pagination -->
+<!-- 分页 -->
 {% if paginator.total_pages > 1 %}
 <div class="pagination">
     {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">← 上一页</a>
+    {% else %}
+    <span class="disabled">← 上一页</span>
     {% endif %}
     
-    <span class="current">第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
+    <span class="current">{{ paginator.page }} / {{ paginator.total_pages }}</span>
     
     {% if paginator.next_page %}
     <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">下一页 →</a>
+    {% else %}
+    <span class="disabled">下一页 →</span>
     {% endif %}
+</div>
+{% endif %}
+
+{% else %}
+<!-- 空状态 -->
+<div class="empty-state">
+    <div class="empty-state-icon">📝</div>
+    <p class="empty-state-text">暂无文章</p>
 </div>
 {% endif %}
